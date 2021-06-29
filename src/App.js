@@ -23,35 +23,51 @@ function App() {
     if(loading) {
       return (
           <section className="section loading">
-              <h2>Loading...</h2>
+              <h1>Loading...</h1>
           </section>
       )
     }
     const {company, title, dates, duties, id} = jobs[value];
     return (
        <section className="section">
-          <h2>Job Experience</h2>
-          <div>
-              {jobs.map((job, index) => {
-                  return (
-                      <button key={job.id} onClick={() => setValue(index)}>{job.company}</button>
-                  )
-              })}
-          </div>
-           <div key={id}>
-                <h3>{title}</h3>
-                <h4>{company}</h4>
-                <p>{dates}</p>
-                {duties.map((duty, index) => {
-                    return(
-                        <div key={index}>
-                            <FaAngleDoubleRight />
-                            <p>{duty}</p>
-                        </div>
-                    )
-                })}
-            </div>
-       </section>
+      <div className="title">
+        <h2>experience</h2>
+        <div className="underline"></div>
+      </div>
+      <div className="jobs-center">
+        {/* btn container */}
+        <div className="btn-container">
+          {jobs.map((item, index) => {
+            return (
+              <button
+                key={item.id}
+                onClick={() => setValue(index)}
+                className={`job-btn ${index === value && 'active-btn'}`}
+              >
+                {item.company}
+              </button>
+            )
+          })}
+        </div>
+        {/* job info */}
+        <article className="job-info">
+          <h3>{title}</h3>
+          <h4>{company}</h4>
+          <p className="job-date">{dates}</p>
+          {duties.map((duty, index) => {
+            return (
+              <div key={index} className="job-desc">
+                <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
+                <p>{duty}</p>
+              </div>
+            )
+          })}
+        </article>
+      </div>
+      <button type="button" className="btn">
+        more info
+      </button>
+    </section>
     )
 }
 
